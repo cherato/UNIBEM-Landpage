@@ -28,7 +28,7 @@ export default function ContactForm({ web3formsKey }: ContactFormProps) {
   const [status, setStatus] = useState<FormStatus>('idle')
 
   const inputBase =
-    'w-full border border-gray-200 rounded-xl px-4 py-3 text-brand-gray text-sm focus:outline-none focus:ring-2 focus:ring-brand-orange focus:border-transparent transition placeholder:text-gray-400 bg-white'
+    'w-full rounded-[10px] border border-ink-line bg-white px-4 py-3 text-sm text-ink-soft transition placeholder:text-ink-faint focus:border-uni-yellow-deep focus:outline-none focus:ring-2 focus:ring-uni-yellow'
 
   function handleChange(
     e: React.ChangeEvent<
@@ -64,19 +64,19 @@ export default function ContactForm({ web3formsKey }: ContactFormProps) {
   if (status === 'success') {
     return (
       <div className="flex flex-col items-center justify-center gap-4 py-16 text-center">
-        <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center">
-          <CheckCircle className="w-8 h-8 text-green-600" />
+        <div className="flex h-16 w-16 items-center justify-center rounded-brick border-b-4 border-uni-green-dark bg-uni-green text-ink">
+          <CheckCircle className="h-8 w-8" />
         </div>
-        <h3 className="font-heading font-bold text-xl text-brand-brown">
+        <h3 className="font-heading text-xl font-semibold text-ink">
           Mensagem enviada!
         </h3>
-        <p className="text-brand-gray max-w-sm">
+        <p className="max-w-sm text-ink-muted">
           Obrigado pelo contato. Responderemos em breve.
         </p>
         <button
           type="button"
           onClick={() => setStatus('idle')}
-          className="text-brand-orange text-sm font-medium hover:underline"
+          className="text-sm font-bold text-uni-blue hover:underline"
         >
           Enviar outra mensagem
         </button>
@@ -87,15 +87,15 @@ export default function ContactForm({ web3formsKey }: ContactFormProps) {
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-5" noValidate>
       {status === 'error' && (
-        <div className="flex items-center gap-3 bg-red-50 border border-red-200 rounded-xl px-4 py-3 text-red-700 text-sm">
-          <AlertCircle className="w-5 h-5 flex-shrink-0" />
+        <div className="flex items-center gap-3 rounded-[10px] border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+          <AlertCircle className="h-5 w-5 flex-shrink-0" />
           Ocorreu um erro ao enviar. Tente novamente ou entre em contato por telefone.
         </div>
       )}
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-brand-brown mb-1.5">
+          <label htmlFor="name" className="mb-1.5 block text-sm font-bold text-ink">
             Nome completo *
           </label>
           <input
@@ -110,7 +110,7 @@ export default function ContactForm({ web3formsKey }: ContactFormProps) {
           />
         </div>
         <div>
-          <label htmlFor="phone" className="block text-sm font-medium text-brand-brown mb-1.5">
+          <label htmlFor="phone" className="mb-1.5 block text-sm font-bold text-ink">
             Telefone
           </label>
           <input
@@ -126,7 +126,7 @@ export default function ContactForm({ web3formsKey }: ContactFormProps) {
       </div>
 
       <div>
-        <label htmlFor="email" className="block text-sm font-medium text-brand-brown mb-1.5">
+        <label htmlFor="email" className="mb-1.5 block text-sm font-bold text-ink">
           E-mail *
         </label>
         <input
@@ -142,7 +142,7 @@ export default function ContactForm({ web3formsKey }: ContactFormProps) {
       </div>
 
       <div>
-        <label htmlFor="subject" className="block text-sm font-medium text-brand-brown mb-1.5">
+        <label htmlFor="subject" className="mb-1.5 block text-sm font-bold text-ink">
           Assunto *
         </label>
         <select
@@ -165,7 +165,7 @@ export default function ContactForm({ web3formsKey }: ContactFormProps) {
       </div>
 
       <div>
-        <label htmlFor="message" className="block text-sm font-medium text-brand-brown mb-1.5">
+        <label htmlFor="message" className="mb-1.5 block text-sm font-bold text-ink">
           Mensagem *
         </label>
         <textarea
@@ -183,16 +183,16 @@ export default function ContactForm({ web3formsKey }: ContactFormProps) {
       <button
         type="submit"
         disabled={status === 'submitting'}
-        className="inline-flex items-center justify-center gap-2 bg-brand-orange text-white font-heading font-semibold px-8 py-4 rounded-full hover:bg-brand-orange-dark transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2 disabled:opacity-70 disabled:cursor-not-allowed"
+        className="inline-flex items-center justify-center gap-2 rounded-brick border-b-4 border-uni-blue-dark bg-uni-blue px-8 py-4 font-heading font-semibold text-white transition-colors duration-200 hover:bg-uni-blue-dark focus:outline-none focus:ring-2 focus:ring-uni-blue focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-70"
       >
         {status === 'submitting' ? (
           <>
-            <Loader className="w-5 h-5 animate-spin" />
+            <Loader className="h-5 w-5 animate-spin" />
             Enviando...
           </>
         ) : (
           <>
-            <Send className="w-5 h-5" />
+            <Send className="h-5 w-5" />
             Enviar Mensagem
           </>
         )}

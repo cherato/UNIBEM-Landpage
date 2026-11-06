@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { Menu, X, Heart } from 'lucide-react'
+import { Menu, X } from 'lucide-react'
 import { NAV_LINKS } from '@/constants/content'
 import { useScrollSpy } from '@/hooks/useScrollSpy'
 import { useScrollLock } from '@/hooks/useScrollLock'
@@ -19,70 +19,76 @@ export default function Navbar() {
   useScrollLock(mobileOpen)
 
   useEffect(() => {
-    const onScroll = () => setIsScrolled(window.scrollY > 80)
+    const onScroll = () => setIsScrolled(window.scrollY > 24)
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
   }, [])
 
-  const navBg = isScrolled || mobileOpen
-    ? 'bg-white shadow-md'
-    : 'bg-transparent'
-
-  const textColor = isScrolled || mobileOpen
-    ? 'text-brand-brown'
-    : 'text-white'
-
-  const logoColor = isScrolled || mobileOpen
-    ? 'text-brand-orange'
-    : 'text-white'
+  const scrolled = isScrolled || mobileOpen
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${navBg}`}
+      className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
+        scrolled
+          ? 'bg-bone/90 shadow-[0_1px_0_rgba(16,16,20,0.06)] backdrop-blur-md'
+          : 'bg-bone/60 backdrop-blur-sm'
+      }`}
     >
-      <nav className="container-max flex items-center justify-between px-4 sm:px-6 lg:px-8 h-20">
+      <nav className="container-max flex h-20 items-center justify-between px-4 sm:px-6 lg:px-8">
         {/* Logo */}
         <a
           href="#inicio"
-          onClick={(e) => { e.preventDefault(); scrollTo('#inicio') }}
-          className={`flex items-center gap-2 font-heading font-bold text-xl ${logoColor} transition-colors duration-300`}
+          onClick={(e) => {
+            e.preventDefault()
+            scrollTo('#inicio')
+          }}
+          className="transition-opacity duration-200 hover:opacity-85"
+          aria-label="UNIBEM Imbituva — página inicial"
         >
-          <Heart className="w-6 h-6 fill-current text-brand-orange" strokeWidth={0} />
-          <span>UNIBEM</span>
-          <span className={`text-sm font-normal hidden sm:inline ${isScrolled ? 'text-brand-gray' : 'text-white/70'}`}>
-            Imbituva
-          </span>
+          <img src="./logo.png" alt="UNIBEM Imbituva" className="h-[3.75rem] w-auto" aria-hidden="false" />
         </a>
 
         {/* Desktop links */}
-        <ul className="hidden md:flex items-center gap-8">
+        <ul className="hidden items-center gap-9 md:flex">
           {NAV_LINKS.map((link) => {
             const isActive = activeSection === link.href.replace('#', '')
             return (
               <li key={link.href}>
                 <a
                   href={link.href}
-                  onClick={(e) => { e.preventDefault(); scrollTo(link.href) }}
-                  className={`font-medium text-sm transition-colors duration-200 relative pb-1 ${
-                    textColor
-                  } ${
-                    isActive
-                      ? 'after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-brand-orange after:rounded-full'
-                      : 'hover:text-brand-orange'
+                  onClick={(e) => {
+                    e.preventDefault()
+                    scrollTo(link.href)
+                  }}
+                  className={`relative py-1 text-base font-bold transition-colors duration-200 ${
+                    isActive ? 'text-ink' : 'text-ink-soft hover:text-uni-blue'
                   }`}
                 >
                   {link.label}
+                  {isActive && (
+                    <span
+                      className="absolute -bottom-1.5 left-1/2 flex -translate-x-1/2 items-center gap-0.5"
+                      aria-hidden="true"
+                    >
+                      <span className="h-1.5 w-1.5 rounded-full bg-uni-yellow" />
+                      <span className="h-1.5 w-1.5 rounded-full bg-uni-blue" />
+                      <span className="h-1.5 w-1.5 rounded-full bg-uni-red" />
+                    </span>
+                  )}
                 </a>
               </li>
             )
           })}
         </ul>
 
-        {/* Desktop CTA */}
+        {/* Desktop CTA — brick button */}
         <a
           href="#contato"
-          onClick={(e) => { e.preventDefault(); scrollTo('#contato') }}
-          className="hidden md:inline-flex items-center gap-2 bg-brand-orange text-white px-5 py-2.5 rounded-full text-sm font-semibold font-heading hover:bg-brand-orange-dark transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-offset-2"
+          onClick={(e) => {
+            e.preventDefault()
+            scrollTo('#contato')
+          }}
+          className="hidden rounded-brick border-b-4 border-uni-blue-dark bg-uni-blue px-5 py-2.5 font-heading text-sm font-semibold text-white transition-all duration-200 hover:bg-uni-blue-dark focus:outline-none focus:ring-2 focus:ring-uni-blue focus:ring-offset-2 md:inline-flex"
         >
           Fale Conosco
         </a>
@@ -93,19 +99,19 @@ export default function Navbar() {
           onClick={() => setMobileOpen(!mobileOpen)}
           aria-label={mobileOpen ? 'Fechar menu' : 'Abrir menu'}
           aria-expanded={mobileOpen}
-          className={`md:hidden p-2 rounded-lg transition-colors ${textColor} hover:bg-black/10`}
+          className="rounded-lg p-2 text-ink transition-colors hover:bg-ink/5 md:hidden"
         >
-          {mobileOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          {mobileOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
         </button>
       </nav>
 
       {/* Mobile drawer */}
       <div
-        className={`md:hidden bg-white border-t border-gray-100 overflow-hidden transition-all duration-300 ${
+        className={`overflow-hidden bg-bone transition-all duration-300 md:hidden ${
           mobileOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'
         }`}
       >
-        <ul className="px-6 py-4 flex flex-col gap-1">
+        <ul className="flex flex-col gap-1 px-6 py-4">
           {NAV_LINKS.map((link) => (
             <li key={link.href}>
               <a
@@ -115,7 +121,7 @@ export default function Navbar() {
                   scrollTo(link.href)
                   setMobileOpen(false)
                 }}
-                className="block py-3 px-2 text-brand-brown font-medium rounded-lg hover:bg-brand-cream hover:text-brand-orange transition-colors duration-150"
+                className="block rounded-xl px-3 py-3 font-bold text-ink transition-colors duration-150 hover:bg-white hover:text-uni-blue"
               >
                 {link.label}
               </a>
@@ -129,7 +135,7 @@ export default function Navbar() {
                 scrollTo('#contato')
                 setMobileOpen(false)
               }}
-              className="block text-center bg-brand-orange text-white px-5 py-3 rounded-full font-semibold font-heading hover:bg-brand-orange-dark transition-colors"
+              className="block rounded-brick border-b-4 border-uni-blue-dark bg-uni-blue px-5 py-3 text-center font-heading font-semibold text-white transition-colors hover:bg-uni-blue-dark"
             >
               Fale Conosco
             </a>

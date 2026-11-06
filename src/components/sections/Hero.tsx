@@ -1,5 +1,7 @@
 import { ChevronDown } from 'lucide-react'
 import Button from '@/components/ui/Button'
+import Reveal from '@/components/ui/Reveal'
+import StatBrick from '@/components/ui/StatBrick'
 import { HERO_CONTENT } from '@/constants/content'
 
 function scrollTo(href: string) {
@@ -9,88 +11,77 @@ function scrollTo(href: string) {
 }
 
 export default function Hero() {
-  const lines = HERO_CONTENT.headline.split('\n')
-
   return (
     <section
       id="inicio"
-      className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
+      className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-baseplate"
     >
-      {/* Background gradient */}
-      <div
-        className="absolute inset-0 bg-gradient-to-br from-brand-brown via-[#2d1208] to-[#3d1a0e]"
-        aria-hidden="true"
-      />
-
-      {/* Decorative circles */}
-      <div
-        className="absolute top-1/4 right-0 w-96 h-96 rounded-full bg-brand-orange/10 blur-3xl -translate-y-1/2 translate-x-1/2"
-        aria-hidden="true"
-      />
-      <div
-        className="absolute bottom-1/4 left-0 w-72 h-72 rounded-full bg-brand-orange/5 blur-3xl translate-y-1/2 -translate-x-1/2"
-        aria-hidden="true"
-      />
-
       {/* Content */}
-      <div className="relative z-10 text-center text-white px-4 sm:px-6 max-w-4xl mx-auto py-32">
-        {/* Badge */}
-        <span className="inline-block bg-brand-orange/20 text-brand-orange border border-brand-orange/40 rounded-full px-4 py-1.5 text-sm font-medium mb-6 animate-fade-in">
-          {HERO_CONTENT.badge}
-        </span>
-
-        {/* Headline */}
-        <h1 className="font-heading font-extrabold text-4xl sm:text-5xl lg:text-7xl leading-tight mb-6 animate-fade-up">
-          {lines.map((line, i) => (
-            <span key={i}>
-              {i === 1 ? (
-                <span className="text-brand-orange">{line}</span>
-              ) : (
-                line
-              )}
-              {i < lines.length - 1 && <br />}
+      <div className="relative z-10 mx-auto max-w-4xl px-4 pb-24 pt-28 text-center sm:px-6">
+        {/* Headline — second line is built from toy bricks */}
+        <Reveal>
+          <h1 className="font-heading text-4xl font-semibold leading-[1.06] tracking-[-0.03em] text-ink sm:text-6xl lg:text-7xl">
+            <span className="block">Transformando Vidas,</span>
+            <span className="mt-3 flex flex-wrap items-center justify-center gap-2 sm:gap-3">
+              <span className="inline-block rounded-brick border-b-4 border-uni-blue-dark bg-uni-blue px-4 py-1 text-white sm:px-6 sm:py-2">
+                Construindo
+              </span>
+              <span className="inline-block rounded-brick border-b-4 border-uni-yellow-deep bg-uni-yellow px-4 py-1 text-ink sm:px-6 sm:py-2">
+                Futuros
+              </span>
             </span>
-          ))}
-        </h1>
+          </h1>
+        </Reveal>
 
         {/* Subheadline */}
-        <p className="text-white/75 text-lg sm:text-xl max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-up animate-delay-200">
-          {HERO_CONTENT.subheadline}
-        </p>
+        <Reveal delay={140}>
+          <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-ink-muted sm:text-xl">
+            {HERO_CONTENT.subheadline}
+          </p>
+        </Reveal>
 
-        {/* CTAs */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center animate-fade-up animate-delay-300">
-          <Button
-            variant="primary"
-            size="lg"
-            onClick={() => scrollTo('#servicos')}
-          >
-            {HERO_CONTENT.ctaPrimary}
-          </Button>
-          <Button
-            variant="outline"
-            size="lg"
-            onClick={() => scrollTo('#contato')}
-          >
-            {HERO_CONTENT.ctaSecondary}
-          </Button>
-        </div>
+        {/* CTAs — toy-brick buttons */}
+        <Reveal delay={220}>
+          <div className="mt-9 flex flex-col items-center justify-center gap-4 sm:flex-row">
+            <Button
+              variant="primary"
+              color="yellow"
+              size="lg"
+              studs
+              onClick={() => scrollTo('#servicos')}
+            >
+              {HERO_CONTENT.ctaPrimary}
+            </Button>
+            <Button
+              variant="secondary"
+              size="lg"
+              onClick={() => scrollTo('#contato')}
+            >
+              {HERO_CONTENT.ctaSecondary}
+            </Button>
+          </div>
+        </Reveal>
 
-        {/* Stats strip */}
-        <div className="mt-16 flex flex-wrap justify-center gap-8 sm:gap-16 animate-fade-up animate-delay-400">
-          {[
-            { value: '200+', label: 'Crianças' },
-            { value: '50+', label: 'Voluntários' },
-            { value: '10+', label: 'Anos' },
-          ].map((stat) => (
-            <div key={stat.label} className="text-center">
-              <div className="font-heading font-extrabold text-3xl text-brand-orange">
-                {stat.value}
-              </div>
-              <div className="text-white/60 text-sm mt-1">{stat.label}</div>
-            </div>
-          ))}
-        </div>
+        {/* Stats — snap-together bricks */}
+        <Reveal delay={300}>
+          <div className="mt-14 grid grid-cols-3 gap-3 sm:gap-5">
+            <StatBrick value="100+" label="Crianças" tone="blue" />
+            <StatBrick value="50+" label="Voluntários" tone="green" />
+            <StatBrick value="45+" label="Anos" tone="red" />
+          </div>
+        </Reveal>
+      </div>
+
+      {/* Bottom stud strip in the four brand colors */}
+      <div
+        className="absolute bottom-0 left-0 right-0 flex items-center justify-center gap-2 border-t border-ink-line/70 bg-bone/90 py-2.5"
+        aria-hidden="true"
+      >
+        {['text-uni-yellow', 'text-uni-blue', 'text-uni-red', 'text-uni-green', 'text-uni-yellow', 'text-uni-blue', 'text-uni-red', 'text-uni-green'].map(
+          (c, i) => (
+            <span key={i} className={`stud ${c}`} />
+          )
+        )}
       </div>
 
       {/* Scroll indicator */}
@@ -98,9 +89,9 @@ export default function Hero() {
         type="button"
         onClick={() => scrollTo('#quem-somos')}
         aria-label="Rolar para próxima seção"
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/50 hover:text-brand-orange transition-colors animate-bounce"
+        className="absolute bottom-14 left-1/2 -translate-x-1/2 text-ink-muted transition-colors hover:text-uni-blue animate-float"
       >
-        <ChevronDown className="w-8 h-8" />
+        <ChevronDown className="h-8 w-8" />
       </button>
     </section>
   )

@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito+Sans:wght@400;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -10,10 +10,12 @@
   }
 
   body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Nunito Sans', sans-serif;
     font-size: 16px;
-    color: #353535;
-    background-color: #ffffff;
+    color: theme('colors.ink.soft');
+    background-color: theme('colors.bone');
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
 
   h1,
@@ -22,9 +24,30 @@
   h4,
   h5,
   h6 {
-    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-family: 'Fredoka', sans-serif;
     font-weight: 600;
-    color: #1c0d0a;
+    color: theme('colors.ink.DEFAULT');
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background-color: theme('colors.uni.yellow');
+    color: theme('colors.ink.DEFAULT');
+  }
+
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+  ::-webkit-scrollbar-track {
+    background: theme('colors.bone');
+  }
+  ::-webkit-scrollbar-thumb {
+    background: theme('colors.ink.line');
+    border-radius: 9999px;
+    border: 3px solid theme('colors.bone');
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: theme('colors.uni.yellow');
   }
 }
 
@@ -37,19 +60,54 @@
     @apply max-w-7xl mx-auto;
   }
 
-  .animate-delay-100 {
-    animation-delay: 100ms;
+  /* A toy baseplate: subtle stud grid on the page ground. */
+  .bg-baseplate {
+    background-color: theme('colors.bone');
+    background-image: radial-gradient(
+      circle,
+      rgba(16, 16, 20, 0.07) 1.2px,
+      transparent 1.2px
+    );
+    background-size: 22px 22px;
   }
 
-  .animate-delay-200 {
-    animation-delay: 200ms;
+  /* A single toy-brick stud. Uses currentColor for the brick surface. */
+  .stud {
+    display: inline-block;
+    width: 0.72rem;
+    height: 0.72rem;
+    border-radius: 9999px;
+    background: currentColor;
+    box-shadow:
+      inset 0 2px 2px rgba(255, 255, 255, 0.45),
+      inset 0 -3px 4px rgba(0, 0, 0, 0.28),
+      0 1px 2px rgba(16, 16, 20, 0.18);
   }
 
-  .animate-delay-300 {
-    animation-delay: 300ms;
+  /* Scroll-reveal — crisp exponential ease-out, no elastic bounce. */
+  .reveal {
+    opacity: 0;
+    transform: translateY(18px) scale(0.98);
+    transition:
+      opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
   }
 
-  .animate-delay-400 {
-    animation-delay: 400ms;
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+    .animate-float {
+      animation: none;
+    }
   }
 }

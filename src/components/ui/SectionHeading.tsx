@@ -1,43 +1,47 @@
+import Studs from './Studs'
+
 interface SectionHeadingProps {
-  tag?: string
   title: string
   description?: string
   centered?: boolean
   light?: boolean
+  accent?: 'yellow' | 'blue' | 'red' | 'green'
+}
+
+const ACCENT: Record<string, string> = {
+  yellow: 'text-uni-yellow',
+  blue: 'text-uni-blue',
+  red: 'text-uni-red',
+  green: 'text-uni-green',
 }
 
 export default function SectionHeading({
-  tag,
   title,
   description,
   centered = true,
   light = false,
+  accent = 'blue',
 }: SectionHeadingProps) {
   return (
-    <div className={`mb-12 ${centered ? 'text-center' : ''}`}>
-      {tag && (
-        <span
-          className={`inline-block text-sm font-semibold uppercase tracking-widest mb-3 px-4 py-1 rounded-full ${
-            light
-              ? 'bg-white/20 text-white'
-              : 'bg-brand-orange/10 text-brand-orange'
-          }`}
-        >
-          {tag}
-        </span>
-      )}
+    <div className={`mb-12 max-w-3xl ${centered ? 'mx-auto text-center' : ''}`}>
       <h2
-        className={`font-heading text-3xl sm:text-4xl font-bold leading-tight ${
-          light ? 'text-white' : 'text-brand-brown'
+        className={`font-heading text-3xl sm:text-4xl lg:text-5xl font-semibold leading-[1.05] tracking-[-0.03em] ${
+          light ? 'text-white' : 'text-ink'
         }`}
       >
         {title}
       </h2>
+      <Studs
+        count={4}
+        className={`mt-4 ${centered ? 'justify-center' : ''} ${
+          light ? 'text-white/90' : ACCENT[accent]
+        }`}
+      />
       {description && (
         <p
-          className={`mt-4 text-lg max-w-2xl ${centered ? 'mx-auto' : ''} ${
-            light ? 'text-white/80' : 'text-brand-gray'
-          }`}
+          className={`mt-5 text-lg leading-relaxed ${
+            centered ? 'mx-auto' : ''
+          } ${light ? 'text-white/75' : 'text-ink-muted'}`}
         >
           {description}
         </p>

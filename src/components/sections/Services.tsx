@@ -1,5 +1,6 @@
 import { ArrowRight } from 'lucide-react'
 import SectionHeading from '@/components/ui/SectionHeading'
+import Reveal from '@/components/ui/Reveal'
 import ServiceCard from '@/components/ui/ServiceCard'
 import { SERVICES } from '@/constants/content'
 
@@ -8,51 +9,59 @@ function scrollTo(id: string) {
   el?.scrollIntoView({ behavior: 'smooth' })
 }
 
+const CARD_COLORS = ['blue', 'green', 'red', 'yellow'] as const
+
 export default function Services() {
   return (
-    <section id="servicos" className="bg-white section-padding">
+    <section id="servicos" className="bg-bone section-padding">
       <div className="container-max">
-        <SectionHeading
-          tag="Nossos Serviços"
-          title="O que oferecemos às crianças"
-          description="Programas gratuitos e integrais que promovem o desenvolvimento educacional, social e emocional de crianças e adolescentes."
-        />
+        <Reveal>
+          <SectionHeading
+            title="O que oferecemos às crianças"
+            description="Programas gratuitos e integrais que promovem o desenvolvimento educacional, social e emocional de crianças e adolescentes."
+            accent="blue"
+          />
+        </Reveal>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {SERVICES.map((service) => (
-            <ServiceCard key={service.id} service={service} />
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {SERVICES.map((service, i) => (
+            <Reveal key={service.id} delay={(i % 3) * 90}>
+              <ServiceCard
+                service={service}
+                color={CARD_COLORS[i % CARD_COLORS.length]}
+              />
+            </Reveal>
           ))}
         </div>
 
-        {/* CTA band */}
-        <div className="mt-16 bg-gradient-to-r from-brand-orange to-brand-orange-dark rounded-3xl p-8 sm:p-12 text-center text-white overflow-hidden relative">
-          {/* Decorative element */}
-          <div
-            className="absolute right-0 top-0 w-48 h-48 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2"
-            aria-hidden="true"
-          />
-          <div
-            className="absolute left-0 bottom-0 w-32 h-32 bg-white/10 rounded-full translate-y-1/2 -translate-x-1/2"
-            aria-hidden="true"
-          />
-
-          <div className="relative z-10">
-            <h2 className="font-heading font-bold text-2xl sm:text-3xl mb-3 text-white">
-              Quer apoiar nosso trabalho?
-            </h2>
-            <p className="text-white/80 text-lg mb-8 max-w-xl mx-auto">
-              Seja como voluntário, doador ou parceiro, você pode fazer a diferença na vida de uma criança.
-            </p>
-            <button
-              type="button"
-              onClick={() => scrollTo('contato')}
-              className="inline-flex items-center gap-2 bg-white text-brand-orange font-heading font-semibold px-8 py-4 rounded-full hover:bg-brand-cream transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-brand-orange"
-            >
-              Entre em Contato
-              <ArrowRight className="w-5 h-5" />
-            </button>
+        {/* CTA band — yellow brick band with a white button */}
+        <Reveal>
+          <div className="relative mt-16 overflow-hidden rounded-[20px] border-b-4 border-uni-yellow-deep bg-uni-yellow p-8 text-center text-ink shadow-brick sm:p-12">
+            <div className="relative z-10">
+              <h2 className="font-heading text-2xl font-semibold text-ink sm:text-3xl">
+                Quer apoiar nosso trabalho?
+              </h2>
+              <p className="mx-auto mt-3 mb-8 max-w-xl text-lg text-ink/75">
+                Seja como voluntário, doador ou parceiro, você pode fazer a diferença na vida de uma criança.
+              </p>
+              <button
+                type="button"
+                onClick={() => scrollTo('contato')}
+                className="inline-flex flex-col items-center gap-1.5 rounded-brick border-b-4 border-ink-line bg-white px-8 py-3.5 font-heading font-semibold text-ink transition-colors duration-200 hover:bg-bone focus:outline-none focus:ring-2 focus:ring-uni-yellow focus:ring-offset-2 focus:ring-offset-uni-yellow"
+              >
+                <span className="flex items-center gap-1" aria-hidden="true">
+                  {Array.from({ length: 3 }).map((_, i) => (
+                    <span key={i} className="h-1.5 w-1.5 rounded-full bg-ink/15" />
+                  ))}
+                </span>
+                <span className="flex items-center gap-2">
+                  Entre em Contato
+                  <ArrowRight className="h-5 w-5" />
+                </span>
+              </button>
+            </div>
           </div>
-        </div>
+        </Reveal>
       </div>
     </section>
   )

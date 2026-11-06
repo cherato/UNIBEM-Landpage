@@ -5,31 +5,53 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        brand: {
-          orange: '#FF6210',
-          'orange-dark': '#F15808',
-          brown: '#1C0D0A',
-          gray: '#353535',
-          cream: '#FEF1E4',
+        // The UNIBEM four-color identity, pulled from the new logo
+        // (public/logo.png, public/reference_colors.png).
+        uni: {
+          yellow: '#FFCF00',
+          'yellow-deep': '#F0B800',
+          // Dark amber for yellow-* as text/icon on light grounds (AA-safe);
+          // pure yellow stays a fill color.
+          'yellow-ink': '#8A6A00',
+          blue: '#186CC0',
+          'blue-dark': '#0E4A85',
+          red: '#E41818',
+          'red-deep': '#B30E0E',
+          green: '#30B46C',
+          'green-dark': '#1A7A48',
         },
+        // Neutrals — modern ink + bone ground.
+        ink: {
+          DEFAULT: '#101014',
+          soft: '#38383F',
+          muted: '#5C5C66',
+          faint: '#8A8A94',
+          line: '#E6E6EC',
+          softest: '#F4F4F7',
+        },
+        bone: '#FAFAF6',
       },
       fontFamily: {
-        heading: ['"Plus Jakarta Sans"', 'sans-serif'],
-        body: ['Inter', 'sans-serif'],
+        heading: ['"Fredoka"', 'sans-serif'],
+        body: ['"Nunito Sans"', 'sans-serif'],
+      },
+      borderRadius: {
+        brick: '14px',
+      },
+      boxShadow: {
+        card: '0 1px 2px rgba(16,16,20,0.04), 0 8px 24px rgba(16,16,20,0.06)',
+        lift: '0 2px 4px rgba(16,16,20,0.05), 0 16px 40px rgba(16,16,20,0.12)',
+        brick:
+          '0 1px 2px rgba(16,16,20,0.06), 0 12px 28px -12px rgba(16,16,20,0.28)',
       },
       keyframes: {
-        fadeUp: {
-          '0%': { opacity: '0', transform: 'translateY(32px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
-        },
-        fadeIn: {
-          '0%': { opacity: '0' },
-          '100%': { opacity: '1' },
+        float: {
+          '0%,100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-10px)' },
         },
       },
       animation: {
-        'fade-up': 'fadeUp 0.7s ease forwards',
-        'fade-in': 'fadeIn 0.5s ease forwards',
+        float: 'float 5s ease-in-out infinite',
       },
     },
   },

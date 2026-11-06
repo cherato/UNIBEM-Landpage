@@ -8,10 +8,9 @@ export const NAV_LINKS: NavLink[] = [
 ]
 
 export const HERO_CONTENT = {
-  badge: 'OSC — Imbituva, Paraná',
   headline: 'Transformando Vidas,\nConstruindo Futuros',
   subheadline:
-    'A UNIBEM acolhe e apoia crianças e adolescentes em situação de vulnerabilidade social, oferecendo educação, esporte, cultura e muito afeto.',
+    'A UNIBEM atende crianças e adolescentes de 5 a 13 anos em situação de vulnerabilidade social, com atendimento socioassistencial, protetivo e educacional em meio aberto.',
   ctaPrimary: 'Conheça Nossos Serviços',
   ctaSecondary: 'Como Ajudar',
 }
@@ -20,12 +19,12 @@ export const ABOUT_CONTENT = {
   sectionTag: 'Quem Somos',
   headline: 'Uma comunidade unida pelo amor às crianças',
   body: [
-    'A UNIBEM Imbituva é uma Organização da Sociedade Civil (OSC) fundada com o propósito de acolher e proteger crianças e adolescentes em situação de vulnerabilidade social no município de Imbituva e região.',
-    'Atuamos de forma gratuita e transparente, oferecendo estrutura, carinho e oportunidades para que cada criança possa desenvolver todo o seu potencial e ter um futuro digno.',
+    'A UNIBEM — União Imbituvense do Bem Estar da Criança e do Adolescente — foi fundada em 27 de abril de 1978. É uma instituição civil e filantrópica, de direito privado, sem fins lucrativos e sem distinção de raça, credo religioso ou político-partidário, sediada no bairro Morro das Pedras, em Imbituva-PR.',
+    'Presta atendimento socioassistencial, protetivo e educacional em meio aberto a crianças e adolescentes de 5 a 13 anos em situação de vulnerabilidade social — o serviço de convivência e fortalecimento de vínculos.',
   ],
   mission: {
     label: 'Missão',
-    text: 'Promover o desenvolvimento integral de crianças e adolescentes em vulnerabilidade, garantindo seus direitos e fortalecendo os vínculos familiares e comunitários.',
+    text: 'Assegurar os direitos físicos, intelectuais, morais e sociais da criança e do adolescente, instruindo-o e protegendo-o de forma integral.',
   },
   vision: {
     label: 'Visão',
@@ -36,69 +35,69 @@ export const ABOUT_CONTENT = {
     items: ['Amor', 'Transparência', 'Respeito', 'Solidariedade', 'Inclusão'],
   },
   stats: [
-    { value: '200+', label: 'Crianças Atendidas' },
+    { value: '100+', label: 'Crianças Atendidas' },
     { value: '50+', label: 'Voluntários Ativos' },
-    { value: '10+', label: 'Anos de História' },
+    { value: '45+', label: 'Anos de História' },
     { value: '150+', label: 'Famílias Apoiadas' },
   ] as Stat[],
 }
 
 export const SERVICES: ServiceItem[] = [
   {
-    id: 'educacao',
+    id: 'convivencia',
+    icon: 'HeartHandshake',
+    title: 'Convivência e Vínculos',
+    description:
+      'Serviço de convivência e fortalecimento de vínculos familiares e comunitários para crianças e adolescentes em situação de vulnerabilidade social.',
+    tags: ['5–13 anos', 'Gratuito'],
+  },
+  {
+    id: 'educativo',
     icon: 'BookOpen',
-    title: 'Reforço Escolar',
+    title: 'Acompanhamento Educativo',
     description:
-      'Apoio pedagógico para crianças e adolescentes com dificuldades de aprendizagem, com educadores dedicados e materiais didáticos.',
-    tags: ['6–14 anos', 'Gratuito'],
-  },
-  {
-    id: 'esporte',
-    icon: 'Dumbbell',
-    title: 'Esporte e Lazer',
-    description:
-      'Atividades esportivas que promovem saúde, disciplina e integração social. Futebol, vôlei e atletismo com acompanhamento especializado.',
-    tags: ['8–17 anos', 'Gratuito'],
-  },
-  {
-    id: 'cultura',
-    icon: 'Music',
-    title: 'Arte e Cultura',
-    description:
-      'Oficinas de música, teatro, dança e artes visuais que desenvolvem criatividade, autoestima e expressão cultural.',
-    tags: ['6–17 anos', 'Gratuito'],
+      'Ações socioeducativas lúdicas, em contra turno escolar, com turmas organizadas por ano escolar e até 20 alunos por turma.',
+    tags: ['Contra turno', 'Gratuito'],
   },
   {
     id: 'alimentacao',
     icon: 'UtensilsCrossed',
-    title: 'Alimentação Saudável',
+    title: 'Alimentação',
     description:
-      'Refeições nutritivas diárias para crianças em situação de vulnerabilidade, garantindo segurança alimentar e bem-estar.',
-    tags: ['Todas as idades', 'Gratuito'],
+      'Café da manhã, almoço e lanche da tarde para os turnos matutino e vespertino, com 4 horas diárias de permanência.',
+    tags: ['Café, almoço e lanche', 'Gratuito'],
   },
   {
-    id: 'psicossocial',
-    icon: 'HeartHandshake',
-    title: 'Apoio Psicossocial',
+    id: 'prevencao',
+    icon: 'ShieldCheck',
+    title: 'Prevenção',
     description:
-      'Atendimento psicológico e assistência social às famílias, fortalecendo vínculos afetivos e prevenindo situações de risco.',
+      'Planos de prevenção a situações de vulnerabilidade social e à ruptura de vínculos familiares e comunitários.',
     tags: ['Famílias', 'Gratuito'],
   },
   {
-    id: 'profissionalizacao',
-    icon: 'GraduationCap',
-    title: 'Profissionalização',
+    id: 'protecao',
+    icon: 'Heart',
+    title: 'Proteção Integral',
     description:
-      'Cursos de qualificação profissional para adolescentes, preparando-os para o primeiro emprego e o mercado de trabalho.',
-    tags: ['14–17 anos', 'Gratuito'],
+      'Garantia dos direitos físicos, intelectuais, morais e sociais, segundo o Estatuto da Criança e do Adolescente.',
+    tags: ['5–13 anos', 'Gratuito'],
+  },
+  {
+    id: 'rede',
+    icon: 'Users',
+    title: 'Trabalho em Rede',
+    description:
+      'Atuação articulada com as políticas de Educação, Saúde e Assistência Social pela proteção integral.',
+    tags: ['Parcerias', 'Gratuito'],
   },
 ]
 
 export const CONTACT_INFO: ContactInfo = {
-  address: 'Imbituva — Paraná, Brasil',
-  phone: '(42) 9 9999-9999',
+  address: 'R. Aldebaran Brasil, Nº 753, Bairro Morro das Pedras — Imbituva, Paraná',
+  phone: '(42) 99914-8450',
   email: 'contato@unibemimbituva.com.br',
-  whatsapp: '5542999999999',
+  whatsapp: '5542999148450',
   mapsEmbedUrl:
     'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d57847.47453760637!2d-50.61215!3d-25.1028!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94e81acd17a72537%3A0x5c30d9e1c87e8e82!2sImbituva%2C%20PR!5e0!3m2!1spt!2sbr!4v1700000000000!5m2!1spt!2sbr',
 }
@@ -106,12 +105,12 @@ export const CONTACT_INFO: ContactInfo = {
 export const SOCIAL_LINKS: SocialLink[] = [
   {
     platform: 'facebook',
-    url: 'https://facebook.com/unibemimbituva',
+    url: 'https://www.facebook.com/unibem.imbituva',
     label: 'Facebook da UNIBEM Imbituva',
   },
   {
     platform: 'instagram',
-    url: 'https://instagram.com/unibemimbituva',
+    url: 'https://www.instagram.com/unibem.imbituva',
     label: 'Instagram da UNIBEM Imbituva',
   },
 ]

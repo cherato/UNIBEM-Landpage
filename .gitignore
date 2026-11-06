@@ -28,3 +28,10 @@ Thumbs.db
 # Logs
 *.log
 npm-debug.log*
+
+# Agent / local tooling
+.reasonix/
+.claude/
+.impeccable/
+reasonix.toml
+.mcp.json
